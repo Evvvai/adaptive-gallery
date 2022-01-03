@@ -58,6 +58,13 @@
   animation: not-found-load 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+.home-header-drop {
+  opacity: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
 @keyframes not-found-load {
   0% {
     opacity: 0;

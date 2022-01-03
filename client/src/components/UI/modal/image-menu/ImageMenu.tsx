@@ -183,6 +183,7 @@ const ImageMenu: FC<Props> = (props) => {
             <div
               className="submit-content__preset"
               onClick={(e) => {
+                clearPhotos()
                 loadPhotos(JSON.parse(JSON.stringify(photosPreset)).galleryImages)
                 handleClickClose(e)
               }}

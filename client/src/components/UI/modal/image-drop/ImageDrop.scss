@@ -1,0 +1,41 @@
+$scale-base: 320px;
+
+.image-drop {
+  position: relative;
+  border-radius: 35px;
+
+  display: flex;
+  margin: auto;
+
+  overflow: hidden;
+
+  width: $scale-base;
+  height: $scale-base;
+}
+
+.image-drop-content {
+  width: 100%;
+  border: 5px dashed var(--color-text);
+  border-radius: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__input {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  &__icon {
+    min-height: calc($scale-base / 2);
+    min-width: calc($scale-base / 2);
+    fill: var(--color-text);
+  }
+}
+
+/* ////////////////////////////////////////////////////// */

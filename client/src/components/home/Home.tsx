@@ -1,15 +1,18 @@
 import './Home.scss'
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 
 // Icons
 import { IoMdImages } from 'react-icons/io'
 
 // Components
 import Gallery from '../gallery/Gallery'
+import DropImage from './drop-image/DropImage'
 
 // Custom hooks
 import { useGallery } from '../../hooks/store/gallery/useGallery'
 import { useGalleryMenu } from '../../hooks/store/gallery/useGalleryMenu'
+
+// Utils
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 const Home: FC = () => {
@@ -28,7 +31,10 @@ const Home: FC = () => {
           <h1 className="home-empty__title">No photos uploaded</h1>
         </div>
       ) : (
-        <Gallery photos={JSON.parse(JSON.stringify(photos))} margin={1} rowHeight={200} />
+        <Fragment>
+          <Gallery photos={JSON.parse(JSON.stringify(photos))} margin={1} rowHeight={200} />
+          <DropImage /> {/* Funny thing ♿ */}
+        </Fragment>
       )}
     </section>
   )
