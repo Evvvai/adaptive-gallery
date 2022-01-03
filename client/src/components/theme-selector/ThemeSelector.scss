@@ -1,0 +1,29 @@
+.theme-selector {
+  // position: fixed;
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  width: 100%;
+
+  right: 10px;
+  z-index: 10;
+}
+
+.theme-selector-content {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--color-background-modal);
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.theme-selector-item {
+  min-width: 24px;
+  min-height: 24px;
+  margin: 2px;
+  fill: var(--color-header);
+
+  &.active {
+    fill: var(--color-highlight);
+  }
+}

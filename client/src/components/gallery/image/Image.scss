@@ -1,0 +1,54 @@
+.image {
+  position: relative;
+  overflow: hidden;
+
+  &__img {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1);
+    max-height: 500px;
+    object-fit: contain;
+
+    &.isLoading {
+      @include placeholder;
+      border: 1px solid var(--color-background-highlight);
+      border-radius: 5px;
+    }
+  }
+
+  &:hover {
+    .image-options {
+      opacity: 1;
+    }
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+
+.image-options {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+
+  opacity: 0;
+  cursor: pointer;
+
+  width: 35px;
+  height: 35px;
+
+  border-radius: 50%;
+  background-color: var(--color-background-highlight);
+  box-shadow: 0 0 5px rgb(0 0 0 / 50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__delete {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px var(--color-highlight);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+  transition: all 0.2s ease-out;
+}

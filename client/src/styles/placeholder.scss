@@ -1,0 +1,25 @@
+@keyframes placeholderAnimation {
+  from {
+    background-position: -1000px 0;
+  }
+  to {
+    background-position: 1000px 0;
+  }
+}
+
+$placeholder-image: linear-gradient(
+  to left,
+  transparent 0%,
+  transparent 45%,
+  rgba(100, 100, 100, 0.05) 50%,
+  transparent 55%,
+  transparent 100%
+);
+$placeholder-size: 1000px 100%;
+$placeholder-animation: placeholderAnimation 2s linear infinite;
+
+@mixin placeholder {
+  animation: $placeholder-animation;
+  background-image: $placeholder-image;
+  background-size: $placeholder-size;
+}

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "paths": {
+      "@types": ["types"],
+      "@utils": ["utils"],
+      "@browserUtils": ["utils/browser"],
+      "@components": ["components"]
+    }
+  }
+}
