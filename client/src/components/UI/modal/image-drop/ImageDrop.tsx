@@ -14,22 +14,21 @@ import { Photo } from '@types'
 
 // Interface
 interface Props {
-  isOpen: boolean
-  setOpen: any
+  isOpen?: boolean
+  close?: any
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const ImageDrop: FC<Props> = ({ isOpen, setOpen }) => {
+const ImageDrop: FC<Props> = ({ isOpen, close }) => {
   const { loadPhotos, addPhoto, photos } = useGallery()
 
-  const handleClickDrop = (event: any) => setOpen(false)
+  const handleClickDrop = (event: any) => close(false)
   const handleChangeDrop = (event: any) => {
+    const type = event.target.files[0].type
+    const size = event.target.files[0].size
     if (
-      (event.target.files[0].type === 'image/gif' ||
-        event.target.files[0].type === 'image/jpeg' ||
-        event.target.files[0].type === 'image/jpg' ||
-        event.target.files[0].type === 'image/png') &&
-      event.target.files[0].size < 9999999
+      (type === 'image/gif' || type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png') &&
+      size < 9999999
     ) {
       const reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
@@ -48,7 +47,7 @@ const ImageDrop: FC<Props> = ({ isOpen, setOpen }) => {
           photo.id = photos.length + 1
 
           addPhoto(photo)
-          setOpen(false)
+          close()
         }
       }
     }
@@ -60,7 +59,7 @@ const ImageDrop: FC<Props> = ({ isOpen, setOpen }) => {
         try {
           const photosValid = await JSON.parse(e.target.result).galleryImages
           loadPhotos(photosValid)
-          setOpen(false)
+          close()
         } catch (e) {}
       }
     }

@@ -46,7 +46,7 @@ const Header: FC = () => {
             <BiImages className="header-item__icon" />
             <Portal>
               <Modal isOpen={isGalleryMenu} setOpen={handleClickMenuOpen}>
-                <ImageMenu isOpen={isGalleryMenu} setOpen={handleClickMenuOpen} />
+                <ImageMenu />
               </Modal>
             </Portal>
           </li>

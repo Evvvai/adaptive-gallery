@@ -18,12 +18,12 @@ import { Photo } from '@types'
 
 // Interface
 interface Props {
-  isOpen: boolean
-  setOpen: any
+  isOpen?: boolean
+  close?: any
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const ImageMenu: FC<Props> = (props) => {
+const ImageMenu: FC<Props> = ({ isOpen, close }) => {
   const { loadPhotos, clearPhotos, addPhoto, photos } = useGallery()
 
   const [invalidJson, setInvalidJson] = useState<boolean>(false)
@@ -32,12 +32,11 @@ const ImageMenu: FC<Props> = (props) => {
 
   const handleClickDrop = (event: any) => setInvalidJson(false)
   const handleChangeDrop = (event: any) => {
+    const type = event.target.files[0].type
+    const size = event.target.files[0].size
     if (
-      (event.target.files[0].type === 'image/gif' ||
-        event.target.files[0].type === 'image/jpeg' ||
-        event.target.files[0].type === 'image/jpg' ||
-        event.target.files[0].type === 'image/png') &&
-      event.target.files[0].size < 9999999
+      (type === 'image/gif' || type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png') &&
+      size < 9999999
     ) {
       const reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
@@ -68,7 +67,7 @@ const ImageMenu: FC<Props> = (props) => {
         try {
           const photosValid = await JSON.parse(e.target.result).galleryImages
           loadPhotos(photosValid)
-          props.setOpen(false)
+          handleClickClose(event)
         } catch (e) {
           setInvalidJson(true)
         }
@@ -78,7 +77,6 @@ const ImageMenu: FC<Props> = (props) => {
       }
     }
   }
-
   const handleChangeUrl = (url: string) => {
     setImageUrl(url)
     const image = new Image()
@@ -96,13 +94,11 @@ const ImageMenu: FC<Props> = (props) => {
       setImageSelected(photo)
     }
   }
-
-  const handleClickClose = (event: any) => props.setOpen(false)
-
+  const handleClickClose = (event: any) => close()
   const handleClickUpload = (event: any) => {
     if (!verifyImage()) return
     addPhoto(imageSelected)
-    props.setOpen(false)
+    handleClickClose(event)
     setImageUrl('')
     setImageSelected({} as Photo)
   }
@@ -170,12 +166,7 @@ const ImageMenu: FC<Props> = (props) => {
         )}
 
         <div className="image-menu-remote">
-          <MyInput
-            label={'image url'}
-            model={{ value: imageUrl, setValue: handleChangeUrl }}
-            type={'text'}
-            name={'search'}
-          />
+          <MyInput label={'image url'} model={{ value: imageUrl, setValue: handleChangeUrl }} type={'text'} />
         </div>
 
         <div className="image-menu-submit submit-content">

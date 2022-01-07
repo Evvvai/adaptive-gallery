@@ -1,5 +1,5 @@
 import './Modal.scss'
-import { useCallback, useState } from 'react'
+import { Children, cloneElement, isValidElement, useCallback, useState } from 'react'
 
 // Style
 
@@ -36,6 +36,16 @@ export default function Modal(props: Props): JSX.Element {
     }
   }, [])
 
+  const childrenWithProps = Children.map(props.children, (child) => {
+    if (isValidElement(child)) {
+      return cloneElement<any>(child, {
+        close: handleClickClose,
+        isOpen: props.isOpen,
+      })
+    }
+    return child
+  })
+
   return (
     <div
       onMouseDown={handleClickClose}
@@ -43,7 +53,7 @@ export default function Modal(props: Props): JSX.Element {
     >
       <div className="modal__inner">
         <div onMouseDown={(e) => e.stopPropagation()} className="modal__content">
-          {props.children}
+          {childrenWithProps}
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ const DropImage: FC = () => {
       {!isGalleryMenu && (
         <Portal>
           <Modal setOpen={setIsArea} isOpen={isArea}>
-            <ImageDrop setOpen={setIsArea} isOpen={isArea} />
+            <ImageDrop />
           </Modal>
         </Portal>
       )}
